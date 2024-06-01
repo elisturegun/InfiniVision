@@ -3,33 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinivision - Intelligent Text-to-Image Generator</title>
+    <title>InfiniVision - Text-to-Image Generator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            text-align: center;
-            padding: 50px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(120deg, #ff0000, #ff6b6b);
+            background-size: 200% 200%;
+            animation: gradientAnimation 10s ease infinite;
         }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .header {
             font-size: 48px;
-            color: #e43d3b;
+            font-family: Sans-serif;
+            color: #ff0000;
             margin-bottom: 20px;
+            /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
         }
+
         .container {
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
             max-width: 600px;
-            margin: 0 auto;
+            width: 90%;
+            text-align: center;
         }
+
         label {
             font-size: 18px;
             margin-bottom: 10px;
             display: block;
         }
+
         .input-group {
             display: flex;
             justify-content: center;
@@ -37,18 +56,22 @@
             gap: 10px;
             margin-bottom: 20px;
         }
+
         .text-input {
             flex-grow: 1;
         }
+
         input[type="text"] {
             width: 100%;
-            padding: 10px;
+            padding: 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 16px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         input[type="submit"] {
-            background-color: #e43d3b;
+            background-color: #ff0000;
             color: white;
             border: none;
             padding: 15px 30px;
@@ -56,12 +79,15 @@
             cursor: pointer;
             border-radius: 4px;
             margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
         input[type="submit"]:hover {
             background-color: #c53631;
         }
+
         .voice-button {
-            background-color: #e43d3b;
+            background-color: #ff0000;
             color: white;
             border: none;
             padding: 15px;
@@ -71,131 +97,151 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
         .voice-button:hover {
             background-color: #c53631;
         }
+
         .voice-button img {
             width: 20px;
             height: 20px;
         }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
     </style>
 </head>
 <body>
-    <div class="header">Infinivision</div>
+    <div id="particles-js"></div>
     <div class="container">
+        <div class="header">InfiniVision</div>
         <h1>Intelligent Text-to-Image Generator</h1>
         <form action="/generate" method="POST">
             <div class="input-group">
-                <!-- <input type="hidden" name="voice" value="true">
-                <button type="submit" class="voice-button">
-                    <img src="https://img.icons8.com/ios-filled/50/ffffff/microphone.png" alt="Microphone Icon">
-                </button> -->
-                <input type="text" id="text" name="text" placeholder="Describe your vision..." class="text-input">
-            </div>
-            <input type="submit" value="Generate Image">
-        </form>
-    </div>
-</body>
-</html>
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InfiniVision</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            text-align: center;
-            padding: 50px;
-        }
-        .header {
-            font-size: 48px;
-            color: #ff0000;
-            margin-bottom: 20px;
-        }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        label {
-            font-size: 18px;
-            margin-bottom: 10px;
-            display: block;
-        }
-        .input-group {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .text-input {
-            flex-grow: 1;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        input[type="submit"] {
-            background-color: #ff0000;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 4px;
-            margin-top: 20px;
-        }
-        input[type="submit"]:hover {
-            background-color: #c53631;
-        }
-        .voice-button {
-            background-color: #ff0000;
-            color: white;
-            border: 7px;
-            padding: 11px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .voice-button:hover {
-            background-color: #c53631;
-        }
-        .voice-button img {
-            width: 20px;
-            height: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="header">InfiniVision</div>
-    <div class="container">
-        <h1>Text-to-Image Generator</h1>
-        <form action="/generate" method="POST">
-            <div class="input-group">
-                <input type="text" id="text" name="text" placeholder="Describe your vision..." class="text-input">
                 <input type="hidden" name="voice" value="true">
                 <button type="submit" class="voice-button">
                     <img src="https://img.icons8.com/ios-filled/50/ffffff/microphone.png" alt="Microphone Icon">
                 </button>
+                <input type="text" id="text" name="text" placeholder="Describe your vision..." class="text-input">
             </div>
             <input type="submit" value="Generate Image">
         </form>
     </div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 100,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
 </body>
-</html> -->
+</html>
