@@ -3,6 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinivision - Intelligent Text-to-Image Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        .header {
+            font-size: 48px;
+            color: #e43d3b;
+            margin-bottom: 20px;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        label {
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .input-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .text-input {
+            flex-grow: 1;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #e43d3b;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        input[type="submit"]:hover {
+            background-color: #c53631;
+        }
+        .voice-button {
+            background-color: #e43d3b;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .voice-button:hover {
+            background-color: #c53631;
+        }
+        .voice-button img {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Infinivision</div>
+    <div class="container">
+        <h1>Intelligent Text-to-Image Generator</h1>
+        <form action="/generate" method="POST">
+            <div class="input-group">
+                <!-- <input type="hidden" name="voice" value="true">
+                <button type="submit" class="voice-button">
+                    <img src="https://img.icons8.com/ios-filled/50/ffffff/microphone.png" alt="Microphone Icon">
+                </button> -->
+                <input type="text" id="text" name="text" placeholder="Describe your vision..." class="text-input">
+            </div>
+            <input type="submit" value="Generate Image">
+        </form>
+    </div>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InfiniVision</title>
     <style>
         body {
@@ -88,13 +189,13 @@
         <form action="/generate" method="POST">
             <div class="input-group">
                 <input type="text" id="text" name="text" placeholder="Describe your vision..." class="text-input">
-                <!-- <input type="hidden" name="voice" value="true"> -->
-                <!-- <button type="submit" class="voice-button"> -->
-                    <!-- <img src="https://img.icons8.com/ios-filled/50/ffffff/microphone.png" alt="Microphone Icon"> -->
-                <!-- </button> -->
+                <input type="hidden" name="voice" value="true">
+                <button type="submit" class="voice-button">
+                    <img src="https://img.icons8.com/ios-filled/50/ffffff/microphone.png" alt="Microphone Icon">
+                </button>
             </div>
             <input type="submit" value="Generate Image">
         </form>
     </div>
 </body>
-</html>
+</html> -->
