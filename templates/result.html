@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinivision - Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        .header {
+            font-size: 48px;
+            color: #e43d3b;
+            margin-bottom: 20px;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .button {
+            background-color: #e43d3b;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 10px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #c53631;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Infinivision</div>
+    <div class="container">
+        <h1>Generated Image</h1>
+        <img src="{{ image_url }}" alt="Generated Image">
+        <br>
+        <a href="{{ image_url }}" class="button" download>Download Image</a>
+        <a href="/" class="button">Create New Image</a>
+    </div>
+</body>
+</html>
