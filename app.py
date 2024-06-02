@@ -1,5 +1,4 @@
 
-
 # RESULT PAGE W BUTTONS
 from flask import Flask, request, render_template, send_file, redirect, url_for
 import openai
