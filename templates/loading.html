@@ -65,12 +65,27 @@
             z-index: -1;
         }
     </style>
+    <script>
+        function checkStatus() {
+            fetch('/status')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ready) {
+                        window.location.href = '/result?filename=' + data.filename;
+                    } else {
+                        setTimeout(checkStatus, 1000);
+                    }
+                });
+        }
+
+        window.onload = checkStatus;
+    </script>
 </head>
 <body>
     <div class="header">𝖨𝗇𝖿𝗂𝗇𝗂𝖵𝗂𝗌𝗂𝗈𝗇</div>
     <div id="particles-js"></div>
     <div class="loader"></div>
-    <p>Generating your image, please wait...</p>
+    <p>Generating your image, this may take some time. Please wait...</p>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         particlesJS("particles-js", {

@@ -1,6 +1,4 @@
-
-# RESULT PAGE W BUTTONS
-from flask import Flask, request, render_template, send_file, redirect, url_for
+from flask import Flask, request, render_template, send_file, redirect, url_for, jsonify
 import openai
 import io
 from PIL import Image
@@ -8,11 +6,14 @@ import requests
 import speech_recognition as sr
 from gtts import gTTS
 import os
+import threading
 
 app = Flask(__name__)
 
 # OpenAI API key
 openai.api_key = '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'
+
+generation_status = {"ready": False, "filename": ""}
 
 def generate_detailed_description(prompt):
     response = openai.ChatCompletion.create(
@@ -61,23 +62,26 @@ def loading():
 
 @app.route('/generate', methods=['POST'])
 def generate():
-    # if 'voice' in request.form:
-    #     text_input = voice_to_text()
-    # else:
+    global generation_status
     text_input = request.form['text']
-        
     detailed_description = generate_detailed_description(text_input)
-    image = generate_image_from_text(detailed_description)
-    
-    img_io = io.BytesIO()
-    image.save(img_io, 'PNG')
-    img_io.seek(0)
 
+    # Reset the status
+    generation_status = {"ready": False, "filename": ""}
     
-    image_filename = 'generated_image.png'
-    image.save(os.path.join('static', image_filename))
+    def generate_image_and_save():
+        global generation_status
+        image = generate_image_from_text(detailed_description)
+        image_filename = 'generated_image.png'
+        image.save(os.path.join('static', image_filename))
+        generation_status = {"ready": True, "filename": image_filename}
     
-    return redirect(url_for('result', filename=image_filename))
+    threading.Thread(target=generate_image_and_save).start()
+    return jsonify({"status": "started"})
+
+@app.route('/status')
+def status():
+    return jsonify(generation_status)
 
 @app.route('/result')
 def result():
@@ -86,6 +90,9 @@ def result():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
 
 # GPT-3 -- DALLE
 # from flask import Flask, request, render_template, send_file

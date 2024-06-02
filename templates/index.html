@@ -140,11 +140,11 @@
     <div id="particles-js"></div>
     <div class="container">
         <h1>𝖳𝖾𝗑𝗍-𝗍𝗈-𝖨𝗆𝖺𝗀𝖾 𝖦𝖾𝗇𝖾𝗋𝖺𝗍𝗈𝗋</h1>
-        <form action="/generate" method="POST">
+        <form id="generateForm" action="/generate" method="POST">
             <div class="input-group">
                 <input type="text" id="text" name="text" placeholder="𝖣𝖾𝗌𝖼𝗋𝗂𝖻𝖾 𝗒𝗈𝗎𝗋 𝗏𝗂𝗌𝗂𝗈𝗇..." class="text-input">
                 <input type="hidden" name="voice" value="true">
-                <button type="submit" class="voice-button">
+                <button type="button" class="voice-button">
                     <img src="https://img.icons8.com/ios-filled/50/ffffff/microphone.png" alt="Microphone Icon">
                 </button>
             </div>
@@ -258,6 +258,15 @@
                 }
             },
             "retina_detect": true
+        });
+
+        document.getElementById('generateForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            window.location.href = '/loading';
+            fetch('/generate', {
+                method: 'POST',
+                body: new FormData(this)
+            });
         });
     </script>
 </body>
