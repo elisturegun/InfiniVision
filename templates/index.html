@@ -1,5 +1,3 @@
-
-<!-- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InfiniVision - Text-to-Image Generator</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -19,30 +19,37 @@
             background: linear-gradient(120deg, #282323, #332929);
             background-size: 200% 200%;
             animation: gradientAnimation 10s ease infinite;
+            flex-direction: column;
         }
 
         @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0%, 100% { background-size: 100% 100%; }
+            50% { background-size: 150% 150%; }
         }
-
         .header {
             font-size: 48px;
-            font-family: Sans-serif;
+            font-family: 'Roboto Mono', monospace;
             color: #ff0000;
             margin-bottom: 20px;
-            /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.9);
+            background: linear-gradient(135deg, rgba(223, 210, 210, 0.9), rgba(255, 255, 255, 0.7));
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
             max-width: 600px;
             width: 90%;
+            font-family: 'Roboto Mono', monospace;
             text-align: center;
+            border: 2px solid #9d9797;
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: scale(1.05);
         }
 
         label {
@@ -69,7 +76,12 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 16px;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: inset 0 2px 4px rgba(253, 253, 253, 0.621);
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #aaa;
         }
 
         input[type="submit"] {
@@ -77,11 +89,12 @@
             color: white;
             border: none;
             padding: 15px 30px;
-            font-size: 16px;
+            font-size: 17px;
             cursor: pointer;
             border-radius: 4px;
             margin-top: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(203, 203, 203, 0.766);
+            transition: background-color 0.3s ease;
         }
 
         input[type="submit"]:hover {
@@ -100,6 +113,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
         }
 
         .voice-button:hover {
@@ -122,21 +136,22 @@
     </style>
 </head>
 <body>
+    <div class="header">𝖨𝗇𝖿𝗂𝗇𝗂𝖵𝗂𝗌𝗂𝗈𝗇</div>
     <div id="particles-js"></div>
     <div class="container">
-        <div class="header">InfiniVision</div>
-        <h1>Intelligent Text-to-Image Generator</h1>
+        <h1>𝖳𝖾𝗑𝗍-𝗍𝗈-𝖨𝗆𝖺𝗀𝖾 𝖦𝖾𝗇𝖾𝗋𝖺𝗍𝗈𝗋</h1>
         <form action="/generate" method="POST">
             <div class="input-group">
+                <input type="text" id="text" name="text" placeholder="𝖣𝖾𝗌𝖼𝗋𝗂𝖻𝖾 𝗒𝗈𝗎𝗋 𝗏𝗂𝗌𝗂𝗈𝗇..." class="text-input">
                 <input type="hidden" name="voice" value="true">
                 <button type="submit" class="voice-button">
                     <img src="https://img.icons8.com/ios-filled/50/ffffff/microphone.png" alt="Microphone Icon">
                 </button>
-                <input type="text" id="text" name="text" placeholder="Describe your vision..." class="text-input">
             </div>
-            <input type="submit" value="Generate Image">
+            <input type="submit" value="𝖦𝖾𝗇𝖾𝗋𝖺𝗍𝖾 𝖨𝗆𝖺𝗀𝖾">
         </form>
     </div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         particlesJS("particles-js", {
@@ -245,112 +260,5 @@
             "retina_detect": true
         });
     </script>
-</body>
-</html>  -->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinivision - Intelligent Text-to-Image Generator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            text-align: center;
-            padding: 50px;
-        }
-        .header {
-            font-size: 48px;
-            color: #e43d3b;
-            margin-bottom: 20px;
-        }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        label {
-            font-size: 18px;
-            margin-bottom: 10px;
-            display: block;
-        }
-        .input-group {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .text-input {
-            flex-grow: 1;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        input[type="submit"] {
-            background-color: #e43d3b;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 4px;
-            margin-top: 20px;
-        }
-        input[type="submit"]:hover {
-            background-color: #c53631;
-        }
-        .voice-button {
-            background-color: #e43d3b;
-            color: white;
-            border: none;
-            padding: 15px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .voice-button:hover {
-            background-color: #c53631;
-        }
-        .voice-button img {
-            width: 20px;
-            height: 20px;
-        }
-    </style>
-    <script>
-        function showLoading() {
-            document.getElementById("generateForm").submit();
-            window.location.href = "/loading";
-        }
-    </script>
-</head>
-<body>
-    <div class="header">Infinivision</div>
-    <div class="container">
-        <h1>Intelligent Text-to-Image Generator</h1>
-        <form id="generateForm" action="/generate" method="POST">
-            <div class="input-group">
-                <input type="hidden" name="voice" value="true">
-                <button type="submit" class="voice-button">
-                    <img src="https://img.icons8.com/ios-filled/50/ffffff/microphone.png" alt="Microphone Icon">
-                </button>
-                <input type="text" id="text" name="text" placeholder="Describe your vision..." class="text-input">
-            </div>
-            <input type="submit" value="Generate Image" onclick="showLoading()">
-        </form>
-    </div>
 </body>
 </html>
