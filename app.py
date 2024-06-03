@@ -103,7 +103,6 @@ def start_voice_recognition():
 if __name__ == '__main__':
     app.run(debug=True)
 
-
 # en iyi hali -- speech yok
 # from flask import Flask, request, render_template, send_file, redirect, url_for, jsonify
 # import openai
