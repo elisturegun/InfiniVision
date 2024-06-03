@@ -125,6 +125,12 @@
             height: 20px;
         }
 
+        .recording-indicator {
+            display: none;
+            color: red;
+            margin-left: 10px;
+        }
+
         #particles-js {
             position: absolute;
             width: 100%;
@@ -144,14 +150,14 @@
             <div class="input-group">
                 <input type="text" id="text" name="text" placeholder="𝖣𝖾𝗌𝖼𝗋𝗂𝖻𝖾 𝗒𝗈𝗎𝗋 𝗏𝗂𝗌𝗂𝗈𝗇..." class="text-input">
                 <input type="hidden" name="voice" value="true">
-                <button type="button" class="voice-button">
+                <button type="button" class="voice-button" onclick="startVoiceRecognition()">
                     <img src="https://img.icons8.com/ios-filled/50/ffffff/microphone.png" alt="Microphone Icon">
+                    <span class="recording-indicator" id="recording-indicator">Recording...</span>
                 </button>
             </div>
             <input type="submit" value="𝖦𝖾𝗇𝖾𝗋𝖺𝗍𝖾 𝖨𝗆𝖺𝗀𝖾">
         </form>
     </div>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         particlesJS("particles-js", {
@@ -278,9 +284,20 @@
             }
         });
 
-        document.getElementById('voiceButton').addEventListener('click', function() {
-            alert('Please record your voice.');
-        });
+        function startVoiceRecognition() {
+            const recordingIndicator = document.getElementById('recording-indicator');
+            recordingIndicator.style.display = 'inline';
+            fetch('/start_voice_recognition')
+                .then(response => response.json())
+                .then(data => {
+                    recordingIndicator.style.display = 'none';
+                    if (data.success) {
+                        document.getElementById('text').value = data.text;
+                    } else {
+                        alert('Voice recognition failed. Please try again.');
+                    }
+                });
+        }
     </script>
 </body>
 </html>
