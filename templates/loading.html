@@ -66,19 +66,20 @@
         }
     </style>
     <script>
-        function checkStatus() {
+         function checkStatus() {
             fetch('/status')
                 .then(response => response.json())
                 .then(data => {
                     if (data.ready) {
                         window.location.href = '/result?filename=' + data.filename;
                     } else {
-                        setTimeout(checkStatus, 1000);
+                        setTimeout(checkStatus, 5000);
                     }
                 });
         }
 
         window.onload = checkStatus;
+      
     </script>
 </head>
 <body>

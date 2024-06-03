@@ -1,3 +1,4 @@
+
 from flask import Flask, request, render_template, send_file, redirect, url_for, jsonify
 import openai
 import io
@@ -20,7 +21,7 @@ def generate_detailed_description(prompt):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": f"Generate a detailed description of {prompt} to describe an image"}
+            {"role": "user", "content": f"Generate a detailed description of {prompt} to describe an image from 20 years later from now"}
         ]
     )
     description = response['choices'][0]['message']['content'].strip()
@@ -90,9 +91,6 @@ def result():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
 
 # GPT-3 -- DALLE
 # from flask import Flask, request, render_template, send_file

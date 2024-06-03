@@ -262,12 +262,17 @@
 
         document.getElementById('generateForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            window.location.href = '/loading';
             fetch('/generate', {
                 method: 'POST',
                 body: new FormData(this)
-            });
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.status === 'started') {
+                      window.location.href = '/loading';
+                  }
+              });
         });
+        
     </script>
 </body>
 </html>
