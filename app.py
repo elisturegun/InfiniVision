@@ -20,8 +20,11 @@ def generate_detailed_description(prompt):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": f"Generate a detailed description of {prompt} to describe an image from 20 years later from now"}
+            {"role": "system", "content": "You are an artist."},
+            {"role": "user", "content": (
+                f"Generate a detailed description of {prompt} to describe an image "
+                f"as it would appear 20 years from now."
+            )}
         ]
     )
     description = response['choices'][0]['message']['content'].strip()

@@ -36,7 +36,7 @@
         }
 
         .container {
-            background: linear-gradient(135deg, rgba(223, 210, 210, 0.9), rgba(255, 255, 255, 0.7));
+            background: linear-gradient(135deg, rgba(157, 148, 148, 0.405), rgba(255, 255, 255, 0.7));
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -261,18 +261,26 @@
         });
 
         document.getElementById('generateForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            fetch('/generate', {
-                method: 'POST',
-                body: new FormData(this)
-            }).then(response => response.json())
-              .then(data => {
-                  if (data.status === 'started') {
-                      window.location.href = '/loading';
-                  }
-              });
+            let textInput = document.getElementById('text').value;
+            if (textInput.trim() === '') {
+                alert('Please enter a description or record your voice.');
+                event.preventDefault();
+            } else {
+                fetch('/generate', {
+                    method: 'POST',
+                    body: new FormData(this)
+                }).then(response => response.json())
+                  .then(data => {
+                      if (data.status === 'started') {
+                          window.location.href = '/loading';
+                      }
+                  });
+            }
         });
-        
+
+        document.getElementById('voiceButton').addEventListener('click', function() {
+            alert('Please record your voice.');
+        });
     </script>
 </body>
 </html>
