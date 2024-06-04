@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,10 +36,10 @@
         }
 
         .container {
-            background: linear-gradient(135deg, rgba(223, 210, 210, 0.9), rgba(255, 255, 255, 0.7));
+            background: linear-gradient(135deg, rgba(234, 231, 231, 0.9), rgba(229, 224, 224, 0.7));
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 20px rgba(201, 198, 198, 0.2);
             max-width: 600px;
             width: 90%;
             font-family: 'Roboto Mono', monospace;
@@ -75,7 +74,7 @@
             width: 100%;
             padding: 15px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 8px;
             font-size: 16px;
             box-shadow: inset 0 2px 4px rgba(253, 253, 253, 0.621);
             transition: border-color 0.3s ease;
@@ -92,7 +91,7 @@
             padding: 15px 30px;
             font-size: 17px;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 8px;
             margin-top: 20px;
             box-shadow: 0 4px 8px rgba(203, 203, 203, 0.766);
             transition: background-color 0.3s ease;
@@ -104,12 +103,12 @@
 
         .voice-button {
             background-color: #ff0000;
-            color: white;
+            color: rgb(202, 216, 211);
             border: none;
             padding: 15px;
             font-size: 16px;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -125,6 +124,11 @@
             width: 20px;
             height: 20px;
         }
+        .recording-indicator {
+            display: none;
+            color: rgb(202, 216, 211);
+            margin-left: 10px;
+        }
 
         #particles-js {
             position: absolute;
@@ -133,6 +137,37 @@
             top: 0;
             left: 0;
             z-index: -1;
+        }
+
+        
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, rgb(250, 246, 246), rgb(255, 255, 255));
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(110, 108, 108, 0.2);
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+            z-index: 1000;
+        }
+
+        .popup button {
+            background-color: #ff0000;
+            color: rgb(255, 255, 255);
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .popup button:hover {
+            background-color: #c53631;
         }
     </style>
 </head>
@@ -143,16 +178,23 @@
         <h1>𝖳𝖾𝗑𝗍-𝗍𝗈-𝖨𝗆𝖺𝗀𝖾 𝖦𝖾𝗇𝖾𝗋𝖺𝗍𝗈𝗋</h1>
         <form id="generateForm" action="/generate" method="POST">
             <div class="input-group">
-                <input type="text" id="text" name="text" placeholder="𝖣𝖾𝗌𝖼𝗋𝗂𝖻𝖾 𝗒𝗈𝗎𝗋 𝗏𝗂𝗌𝗂𝗈𝗇..." class="text-input">
-                <input type="hidden" name="voice" value="true">
-                <button type="button" class="voice-button">
+                <input type="text" id="text" name="text" placeholder="𝖣𝖾𝗌𝖼𝗋𝗂𝖻𝖾 𝖺 𝗌𝖼𝖾𝗇𝖾 𝖿𝗋𝗈𝗆 20 𝗒𝖾𝖺𝗋𝗌 𝗂𝗇𝗍𝗈 𝗍𝗁𝖾 𝖿𝗎𝗍𝗎𝗋𝖾..." class="text-input">
+                <button type="button" class="voice-button" onclick="startVoiceRecognition()">
                     <img src="https://img.icons8.com/ios-filled/50/ffffff/microphone.png" alt="Microphone Icon">
+                    <span class="recording-indicator" id="recording-indicator">𝖱𝖾𝖼𝗈𝗋𝖽𝗂𝗇𝗀...</span>
                 </button>
             </div>
             <input type="submit" value="𝖦𝖾𝗇𝖾𝗋𝖺𝗍𝖾 𝖨𝗆𝖺𝗀𝖾">
         </form>
     </div>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <div class="popup" id="popup">
+        <p>𝖯𝗅𝖾𝖺𝗌𝖾 𝖾𝗇𝗍𝖾𝗋 𝖺 𝖽𝖾𝗌𝖼𝗋𝗂𝗉𝗍𝗂𝗈𝗇 𝗈𝗋 𝗋𝖾𝖼𝗈𝗋𝖽 𝗒𝗈𝗎𝗋 𝗏𝗈𝗂𝖼𝖾 𝖻𝖾𝖿𝗈𝗋𝖾 𝗀𝖾𝗇𝖾𝗋𝖺𝗍𝗂𝗇𝗀 𝖺𝗇 𝗂𝗆𝖺𝗀𝖾.</p>
+        <button onclick="closePopup()">𝖮𝖪</button>
+    </div>
+    <div class="popup" id="voice-popup">
+        <p>𝖵𝗈𝗂𝖼𝖾 𝗋𝖾𝖼𝗈𝗀𝗇𝗂𝗍𝗂𝗈𝗇 𝖿𝖺𝗂𝗅𝖾𝖽. 𝖯𝗅𝖾𝖺𝗌𝖾 𝗍𝗋𝗒 𝖺𝗀𝖺𝗂𝗇.</p>
+        <button onclick="closeVoicePopup()">𝖮𝖪</button>
+    </div>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         particlesJS("particles-js", {
@@ -263,12 +305,40 @@
 
         document.getElementById('generateForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            window.location.href = '/loading';
-            fetch('/generate', {
-                method: 'POST',
-                body: new FormData(this)
-            });
+            const textInput = document.getElementById('text').value;
+            if (textInput.trim() === '') {
+                document.getElementById('popup').style.display = 'block';
+            } else {
+                fetch('/generate', {
+                    method: 'POST',
+                    body: new FormData(this)
+                });
+                window.location.href = '/loading';
+            }
         });
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        function closeVoicePopup() {
+            document.getElementById('voice-popup').style.display = 'none';
+        }
+
+        function startVoiceRecognition() {
+            const recordingIndicator = document.getElementById('recording-indicator');
+            recordingIndicator.style.display = 'inline';
+            fetch('/start_voice_recognition')
+                .then(response => response.json())
+                .then(data => {
+                    recordingIndicator.style.display = 'none';
+                    if (data.success) {
+                        document.getElementById('text').value = data.text;
+                    } else {
+                        document.getElementById('voice-popup').style.display = 'block';
+                    }
+                });
+        }
     </script>
 </body>
-</html> 
+</html>
