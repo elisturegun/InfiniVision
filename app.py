@@ -28,7 +28,8 @@ def generate_detailed_description(prompt):
     )
     description = response['choices'][0]['message']['content'].strip()
     gpt_end = time.time()
-    print(f"GPT_TIME ---------- = {gpt_end-gpt_start}")
+    print(f"Detailed description: {description}"),
+    print(f"GPT_TIME ---------- = {gpt_end-gpt_start}"),
     return description
 
 def generate_image_from_text(description):
