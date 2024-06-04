@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +37,7 @@
         }
 
         .container {
-            background: linear-gradient(135deg, rgba(157, 148, 148, 0.405), rgba(255, 255, 255, 0.7));
+            background: linear-gradient(135deg, rgba(223, 210, 210, 0.9), rgba(255, 255, 255, 0.7));
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -125,12 +126,6 @@
             height: 20px;
         }
 
-        .recording-indicator {
-            display: none;
-            color: red;
-            margin-left: 10px;
-        }
-
         #particles-js {
             position: absolute;
             width: 100%;
@@ -150,14 +145,14 @@
             <div class="input-group">
                 <input type="text" id="text" name="text" placeholder="𝖣𝖾𝗌𝖼𝗋𝗂𝖻𝖾 𝗒𝗈𝗎𝗋 𝗏𝗂𝗌𝗂𝗈𝗇..." class="text-input">
                 <input type="hidden" name="voice" value="true">
-                <button type="button" class="voice-button" onclick="startVoiceRecognition()">
+                <button type="button" class="voice-button">
                     <img src="https://img.icons8.com/ios-filled/50/ffffff/microphone.png" alt="Microphone Icon">
-                    <span class="recording-indicator" id="recording-indicator">Recording...</span>
                 </button>
             </div>
             <input type="submit" value="𝖦𝖾𝗇𝖾𝗋𝖺𝗍𝖾 𝖨𝗆𝖺𝗀𝖾">
         </form>
     </div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         particlesJS("particles-js", {
@@ -267,37 +262,13 @@
         });
 
         document.getElementById('generateForm').addEventListener('submit', function(event) {
-            let textInput = document.getElementById('text').value;
-            if (textInput.trim() === '') {
-                alert('Please enter a description or record your voice.');
-                event.preventDefault();
-            } else {
-                fetch('/generate', {
-                    method: 'POST',
-                    body: new FormData(this)
-                }).then(response => response.json())
-                  .then(data => {
-                      if (data.status === 'started') {
-                          window.location.href = '/loading';
-                      }
-                  });
-            }
+            event.preventDefault();
+            window.location.href = '/loading';
+            fetch('/generate', {
+                method: 'POST',
+                body: new FormData(this)
+            });
         });
-
-        function startVoiceRecognition() {
-            const recordingIndicator = document.getElementById('recording-indicator');
-            recordingIndicator.style.display = 'inline';
-            fetch('/start_voice_recognition')
-                .then(response => response.json())
-                .then(data => {
-                    recordingIndicator.style.display = 'none';
-                    if (data.success) {
-                        document.getElementById('text').value = data.text;
-                    } else {
-                        alert('Voice recognition failed. Please try again.');
-                    }
-                });
-        }
     </script>
 </body>
-</html>
+</html> 

@@ -1,3 +1,4 @@
+<!-- ÇALIŞIYO-LOADIING PAGE IS DELAYED -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,20 +67,19 @@
         }
     </style>
     <script>
-         function checkStatus() {
+        function checkStatus() {
             fetch('/status')
                 .then(response => response.json())
                 .then(data => {
                     if (data.ready) {
                         window.location.href = '/result?filename=' + data.filename;
                     } else {
-                        setTimeout(checkStatus, 500);
+                        setTimeout(checkStatus, 1000);
                     }
                 });
         }
 
         window.onload = checkStatus;
-      
     </script>
 </head>
 <body>
