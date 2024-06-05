@@ -67,18 +67,19 @@
         }
     </style>
     <script>
+        // check image generation status
         function checkStatus() {
-            fetch('/status')
-                .then(response => response.json())
+            fetch('/status') // send request -> /status
+                .then(response => response.json()) // response to json
                 .then(data => {
-                    if (data.ready) {
-                        window.location.href = '/result?filename=' + data.filename;
+                    if (data.ready) { // if img is ready
+                        window.location.href = '/result?filename=' + data.filename; // redirect to result.html
                     } else {
-                        setTimeout(checkStatus, 1000);
+                        setTimeout(checkStatus, 1000); // check status after 1 second
                     }
                 });
         }
-
+        // when window loads, check status
         window.onload = checkStatus;
     </script>
 </head>

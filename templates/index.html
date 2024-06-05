@@ -303,39 +303,42 @@
             "retina_detect": true
         });
 
+        // handle submit event
         document.getElementById('generateForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const textInput = document.getElementById('text').value;
             if (textInput.trim() === '') {
-                document.getElementById('popup').style.display = 'block';
+                document.getElementById('popup').style.display = 'block'; // show popup if input is empty
             } else {
                 fetch('/generate', {
                     method: 'POST',
-                    body: new FormData(this)
+                    body: new FormData(this) // send form data
                 });
-                window.location.href = '/loading';
+                window.location.href = '/loading'; // redirect to loading page
             }
         });
 
+        // close popup
         function closePopup() {
             document.getElementById('popup').style.display = 'none';
         }
-
+        // close popup
         function closeVoicePopup() {
             document.getElementById('voice-popup').style.display = 'none';
         }
 
+        // start voice recognition
         function startVoiceRecognition() {
             const recordingIndicator = document.getElementById('recording-indicator');
-            recordingIndicator.style.display = 'inline';
+            recordingIndicator.style.display = 'inline'; // show indicator as Recording...
             fetch('/start_voice_recognition')
-                .then(response => response.json())
+                .then(response => response.json()) // response --> json
                 .then(data => {
-                    recordingIndicator.style.display = 'none';
+                    recordingIndicator.style.display = 'none'; // dont show indicator
                     if (data.success) {
-                        document.getElementById('text').value = data.text;
+                        document.getElementById('text').value = data.text; // put text from voice to input box
                     } else {
-                        document.getElementById('voice-popup').style.display = 'block';
+                        document.getElementById('voice-popup').style.display = 'block'; // show error
                     }
                 });
         }
