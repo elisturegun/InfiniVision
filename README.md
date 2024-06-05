@@ -22,7 +22,7 @@ Python 3.8 or higher and pip (Python package installer) are prerequsities for th
                   pip install -r requirements.txt
                   
          3.	Setup API Keys
-         You need an API key to use openai models. Follow these steps to set it up if you wish to change the API key. Current api key hasn’t reached its limit yet:
+         You need an API key to use openai models. Follow these steps to work with your API key:
                   a)	Get an API Key: Obtain your API key from openai website:
                            https://openai.com/index/openai-api/
                            
