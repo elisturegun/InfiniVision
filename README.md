@@ -1,5 +1,4 @@
 # InfiniVision
-Text-To-Image Generator
  
 Text-to-Image Generator
 # 1.	Introduction
