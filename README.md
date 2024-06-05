@@ -68,7 +68,7 @@ Python 3.8 or higher and pip (Python package installer) are prerequsities for th
                   6.	Click on the "Generate Image" button to generate the image.
                   7.	Wait for the image to be generated and displayed on the result page.
 # 5.	Functionality
-         a.	Main Pages and Endpoints
+          Main Pages and Endpoints
                   Index Page (/)
                   •	Description: The main interface where users can enter text descriptions or use voice input to describe a scene.
                   •	Features:
@@ -91,7 +91,7 @@ Python 3.8 or higher and pip (Python package installer) are prerequsities for th
                   •	Description: Handles the text input from the user and initiates the image generation process.
                   •	Parameters:
                   o	text: The textual description provided by the user.
-         •	Response: JSON object indicating the status of the image generation.
+                  •	Response: JSON object indicating the status of the image generation.
          /status (GET)
                   •	Description: Checks the status of the image generation process.
                   •	Response: JSON object with the status and filename of the generated image if ready.
