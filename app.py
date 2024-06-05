@@ -12,7 +12,7 @@ import time
 app = Flask(__name__)
 
 # API key - CHANGE IT TO RUN THE PROGRAM
-openai.api_key = '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'
+openai.api_key = 'your_openai_api_key'
 
 # Image generation status 
 generation_status = {"ready": False, "filename": ""}
