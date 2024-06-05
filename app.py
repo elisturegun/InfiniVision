@@ -11,7 +11,7 @@ import time
 # app init
 app = Flask(__name__)
 
-# API key
+# API key - CHANGE IT TO RUN THE PROGRAM
 openai.api_key = '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'
 
 # Image generation status 
