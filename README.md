@@ -1,4 +1,4 @@
-# InfiniVision
+# # InfiniVision
  
 Text-to-Image Generator
 
